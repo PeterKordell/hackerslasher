@@ -1,0 +1,141 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkfwmh846f4xd"]
+
+[ext_resource type="Texture2D" uid="uid://bdouqjbyexw7n" path="res://assets/Factions/Goblins/Troops/Torch/Blue/Torch_Blue.png" id="1_2pb1h"]
+[ext_resource type="Script" uid="uid://j7qmufba2l7y" path="res://Enemy/Enemy.gd" id="1_epr5s"]
+[ext_resource type="Texture2D" uid="uid://dutr6red1p37t" path="res://assets/Effects/Fire/Fire.png" id="3_vonkd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vso2s"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkela"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2k2y"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jd4ap"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ypri"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxjip"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvarv"]
+atlas = ExtResource("3_vonkd")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px1sc"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am0pq"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqilm"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncf7h"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6jha"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glvfu"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rspp"]
+atlas = ExtResource("1_2pb1h")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efk13"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vso2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkela")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2k2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jd4ap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ypri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxjip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvarv")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px1sc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am0pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqilm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncf7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6jha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glvfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rspp")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pb1h"]
+radius = 27.0
+height = 70.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_px1sc"]
+radius = 27.0
+height = 70.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+script = ExtResource("1_epr5s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_efk13")
+animation = &"Death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2pb1h")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_px1sc")
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
